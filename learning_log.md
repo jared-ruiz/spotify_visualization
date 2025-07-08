@@ -67,4 +67,6 @@ Please provide your data file for utilization:
 
 From here I referenced the pandas documentation to then get introduced to [DataFrames](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame)
 
+Along with my exploration of pandas, I decided to download [Jupyter Notebook](https://jupyter.org/install) to better visualize what I am doing and to practice a bit off of vscode. I am aware that I can view my pandas output within terminal but since this seems to be an avenue data scientist's use often, I thought it would be a fun way to learn as much as possible. I recreated my original python scripts within my notebook and added in some custom options to change how my pandas was outputting in it's cell. 
 
+I can see the use case for this tool right out of the gate. It's very easy to understand and it visualizes your python and data work locally and with each line of code running in it's own block. You can see step by step what is going on and probably helps diagnose a lot of problems during the data process.

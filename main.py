@@ -13,7 +13,7 @@ if len(data_file) < 3:
 
             
             df = pd.DataFrame(init_data)
-            # print(df)
+            print(df)
             
     except:
         print('file name not detected.')
