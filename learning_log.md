@@ -70,3 +70,41 @@ From here I referenced the pandas documentation to then get introduced to [DataF
 Along with my exploration of pandas, I decided to download [Jupyter Notebook](https://jupyter.org/install) to better visualize what I am doing and to practice a bit off of vscode. I am aware that I can view my pandas output within terminal but since this seems to be an avenue data scientist's use often, I thought it would be a fun way to learn as much as possible. I recreated my original python scripts within my notebook and added in some custom options to change how my pandas was outputting in it's cell. 
 
 I can see the use case for this tool right out of the gate. It's very easy to understand and it visualizes your python and data work locally and with each line of code running in it's own block. You can see step by step what is going on and probably helps diagnose a lot of problems during the data process.
+
+## Day 1 - Start of cleaning
+
+I spent the later part of yesterday watching cleaning tutorials with different types of data files. One I latched onto was for a standard .csv file. The gentleman was taking excel data of rugby players and their stats, and utilizing Jupyter Notebook to adjust column names, add in new ones, and cut out unwanted duplicates and empty spaces. That is what I am going to do today, using his examples as reference - [Real World Data Cleaning in Python Pandas (Step by Step)](https://youtu.be/iaZQF8SLHJs?si=pZOBMWtJTpWn-Grt)
+
+### Game Plan
+* Adjust column names to make them easier to read.
+* Convert endTime column into a more readable format
+* Locate duplicates and null values and evaluate if I want to keep them (for use in analysis for most frequent songs played) or keep everything 1 of.
+* Convert milliseconds to seconds for easier reading
+
+To begin, I utilize the rename method within pandas to adjust my DataFrame's current naming scheme as so:
+
+```
+# Adjust dataframe columns
+df = df.rename(columns={
+     'endTime': 'End_Time',
+     'artistName': 'Artist',
+     'trackName': 'Track',
+     'msPlayed': 'Seconds_Played'
+     })
+
+print(df)
+```
+
+This worked out perfectly! I began looking into how to format the End_Time column since I knew I wanted to separate the date and time into their own columns. First, having the column consist of datetime objects as opposed to being a string would be beneficial for me going forward, especially since I will be exporting this DataFrame into SQL once I am done. I found an article that helped me easily convert and check the data types afterwards: ['Convert column type from string to datetime format in Pandas dataframe'](https://www.geeksforgeeks.org/pandas/convert-the-column-type-from-string-to-datetime-format-in-pandas-dataframe/)
+
+I confirmed the successful type change again using the <ins>df.dtypes</ins> function.
+
+```
+End_Time          datetime64[ns]
+Artist                    object
+Track                     object
+Seconds_Played             int64
+dtype: object
+```
+
+

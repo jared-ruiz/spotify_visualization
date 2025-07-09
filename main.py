@@ -13,8 +13,22 @@ if len(data_file) < 3:
 
             
             df = pd.DataFrame(init_data)
-            print(df)
+            # print(df)
             
     except:
         print('file name not detected.')
-        
+ 
+# Adjust dataframe columns
+df = df.rename(columns={
+     'endTime': 'End_Time',
+     'artistName': 'Artist',
+     'trackName': 'Track',
+     'msPlayed': 'Seconds_Played'
+     })
+
+# Change End_Time type from object to datetime object
+df['End_Time'] = pd.to_datetime(df['End_Time'])
+print(df.dtypes)
+
+# print(df.dtypes)
+
