@@ -125,4 +125,4 @@ venv.bak/
 dmypy.json
 
 # jupyter notebook checkpoints
-.ipynb_checkpoints
+.ipynb_checkpoints/
