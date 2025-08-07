@@ -106,5 +106,54 @@ Track                     object
 Seconds_Played             int64
 dtype: object
 ```
+## Day 2 - Preparing to Export to SQL
 
+I wanted to make this project a bit more simple and in that thought process, I decided to keep any duplicates, clear our any null values if possible before export, and to use the current data to see how many times I listened to a particular song, what time of day did I listen to the most songs, etc. 
 
+From my research, depending on the dataset and the answers you are trying to gleam from it, keeping or omitting duplicates can be considered important during the initial cleaning process. 
+
+Using this tutorial to assist with general cleaning tips - [''Real World Data Cleaning in Pandas](https://youtu.be/iaZQF8SLHJs?si=NKi5X-jv41w13ZqO) - I got to see some interesting approaches to checking for duplicate listings, null values, column adjustment syntax, and more. This really helped me figure out a direction once I hit a wall with this process.
+
+Before exporting, I wanted to also use Pandas to do some test grouping of my data to count my top artists and songs. I utilized these to get the results I wanted:
+
+```
+# Test Check for Top Artists
+top_artists = df.groupby('Artist')['Seconds_Played'].sum().reset_index()
+
+top_artists['minutesPlayed'] = top_artists['Seconds_Played'] / 60
+
+artists = top_artists.sort_values(by='Seconds_Played', ascending=False)
+
+print(top_artists.head(10))
+```
+for the top songs, it was very similar:
+```
+# Test Check for Top Songs
+top_songs = df.groupby(['Track', 'Artist']).size().reset_index(name='playCount')
+
+top_songs = top_songs.sort_values(by='playCount', ascending=False)
+
+print(top_songs.head(10))
+```
+The results showed me my top artists, songs, how many times the tops songs were played, and how many seconds minutes were spent listening to the top artists as well.
+
+The last thing I wanted to do was take the specific date times from each listening session and have them become their own column. I want to be able to curate my dashboard with more nuance. For instance:
+
+- What was the most common time of day that I listened to music?
+- What day did I listen to music the most?
+- How many songs were played in a particular month?
+- etc.
+
+In order to achieve this, I utilized the datetime method that comes with Pandas to extract the already datetime affiliated data for 'End_Time'.
+
+I created 5 columns:
+
+> The full date of the listened song <br>
+> The hour of day <br>
+> The specific day it was listened to <br>
+> The month it was listened to <br>
+> The year it was listened to 
+
+This information will be a incredibly useful once I arrive in SQL and Tableau.
+
+I am ready to begin exporting this newly structured data frame into sqlite. I will need to brush up on the set up and such but I will begin that once I have done enough research to begin.

@@ -26,9 +26,30 @@ df = df.rename(columns={
      'msPlayed': 'Seconds_Played'
      })
 
+# print(df)
+
+# Convert MS Within Seconds_Played to Seconds (Divide ms value by 1000)
+df['Seconds_Played'] = (df['Seconds_Played'] / 1000).round(2)
+# print(df)
+
 # Change End_Time type from object to datetime object
 df['End_Time'] = pd.to_datetime(df['End_Time'])
-print(df.dtypes)
 
+# check datatypes -->
 # print(df.dtypes)
+
+# check for null values
+# print(df.isnull.any())
+
+df['Date'] = df['End_Time'].dt.date
+df['Hour'] = df['End_Time'].dt.hour
+df['Weekday'] = df['End_Time'].dt.day_name()
+df['Month'] = df['End_Time'].dt.month_name()
+df['Year'] = df['End_Time'].dt.year
+
+print(df)
+
+
+
+
 
